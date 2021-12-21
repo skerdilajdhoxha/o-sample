@@ -1,0 +1,18 @@
+<div class="ohi_base_top">
+  <div data-collapse="medium" data-animation="default" data-duration="400" class="navbar-3 w-nav">
+    <div class="container-3 w-container">
+      <a href="{% url 'core:home' %}" class="brand-3 w-nav-brand"></a>
+      <nav role="navigation" class="nav-menu-2 w-nav-menu">
+        {% if request.user.is_superuser %}
+        <a href="{% url 'members:member_list' %}" class="ohi_menu_button w-nav-link">Members</a>
+        <a href="{% url 'activity:activity_logs' %}" class="ohi_menu_button w-nav-link">Activity</a>
+        {% endif %}
+        <a href="{% url 'albums:list' %}" class="ohi_menu_button w-nav-link">Albums</a>
+        <a href="{% url 'albums:category_list' %}" class="ohi_menu_button w-nav-link">Categories</a>
+      </nav>
+      <div class="menu-button w-nav-button">
+        <div class="w-icon-nav-menu"></div>
+      </div>
+    </div>
+  </div>
+</div>

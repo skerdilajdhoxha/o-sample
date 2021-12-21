@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<h1 style="color: white;">You don't have permission for this page.</h1>
+<h3 style="color: white;">Please go back <a href="{% url 'core:home' %}">Homepage</a></h3>
+
+{% endblock %}

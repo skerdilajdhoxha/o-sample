@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+{% include 'core/ohi/ohi_top_nav.html' %}
+
+<div class="main_app_silo">
+{% if album.photos %}
+<div class="ohi_photo_detail">
+    <div class="ohi_photo_detail_picture">
+        <div data-animation="slide" data-duration="500" data-infinite="1" class="w-slider">
+            <div class="w-slider-mask">
+                {% for obj in album.all_photos %}
+                <div class="w-slide"><img src="{{ obj.photo.url }}"/></div>
+                {% endfor %}
+            </div>
+            <div class="w-slider-arrow-left">
+                <div class="w-icon-slider-left"></div>
+            </div>
+            <div class="w-slider-arrow-right">
+                <div class="w-icon-slider-right"></div>
+            </div>
+            <div class="w-slider-nav w-round"></div>
+        </div>
+<!--        <a href="#" class="ohi_product_detail w-inline-block"></a>-->
+    </div>
+    <div class="ohi_category_name">{{ album.name }}</div>
+    <a href="{% url 'albums:update' pk=album.pk %}" class="ohi_category_button w-button">EDIT</a>
+    <a href="{% url 'albums:delete' pk=album.pk %}" class="ohi_category_button delate_button delete w-button">🗑</a>
+</div>
+
+{% endif %}
+  {% if album.description %}
+  <div class="ohi_photo_detail_text">
+    <div class="div-block-13">
+      <p class="paragraph-4">{{ album.description }}</p>
+    </div>
+      <a href="{% url 'albums:delete' pk=album.pk %}" class="ohi_category_button w-button">EDIT</a>
+  </div>
+  {% endif %}
+</div>
+
+{% include 'core/ohi/ohi_bottom_nav.html' %}
+
+{% endblock %}

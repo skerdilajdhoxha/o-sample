@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+{% include 'core/ohi/ohi_top_nav.html' %}
+
+<div class="main_app_silo">
+  <div>
+    <form class="form-centered" action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+      <h2 class="blulinkheader">Are you sure you want to delete "{{ object }}"?</h2>
+      <p><input class="create-object-submit-button" type="submit" value="Confirm"></p>
+    </form>
+  </div>
+  </div>
+
+{% include 'core/ohi/ohi_bottom_nav.html' %}
+
+{% endblock %}

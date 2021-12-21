@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+
+<div class="main_app_silo">
+  {% include 'core/landing_page.html' %}
+  <h3 class="blulinkheader"><a href="{% url 'logout' %}">Sign Out</a></h3>
+</div>
+
+{% endblock %}

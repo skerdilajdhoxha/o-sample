@@ -1,0 +1,177 @@
+{% load static %}
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <title>{{ invoice.invoice_title }}</title>
+    <style type="text/css">
+        @page {
+        background-image: url('/static/ohi-shop/images/invoice_background.png');
+        background-image: url('{% static "ohi-shop/images/invoice_background.png" %}');
+        size: 8.5in 11.0in;
+        margin: 0.6cm;
+        margin-top: 5cm;
+        }
+        body {
+          font-weight: 200;
+          font-size: 14px;
+        }
+        table {
+          width: 100%;
+        }
+        th {
+           /* background-color: #A8A8A8; */
+           font-size: 14px;
+        }
+        th.first, th.second, td.first, td.second {
+          text-align: left;
+        }
+        th.third, th.forth, th.fifth, td.third, td.forth, td.fifth {
+          text-align: right;
+        }
+        td.different-font {
+          font-size: 12px;
+          font-weight: bold;
+        }
+
+
+        .header {
+            font-size: 20px;
+            font-weight: 100;
+            text-align: center;
+            color: #007cae;
+        }
+        .title {
+            font-size: 22px;
+            font-weight: 100;
+           /* text-align: right;*/
+           padding: 10px 20px 0px 20px;
+        }
+        .title span {
+            color: #007cae;
+        }
+        .details {
+            padding: 10px 20px 0px 20px;
+            text-align: left !important;
+            /*margin-left: 40%;*/
+        }
+        .hrItem {
+            border: none;
+            height: 10px;
+            /* Set the hr color */
+            color: #333; /* old IE */
+            background-color: #fff; /* Modern Browsers */
+        }
+    </style>
+  </head>
+  <body>
+<!--        <div class='wrapper'>-->
+<!--            <div class='header'>-->
+<!--                <p class='title'>Invoice {{ invoice.invoice_nr }} </p>-->
+<!--            </div>-->
+<!--        <div>-->
+<!--        <div class='details'>-->
+<!--            <h1>-->
+<!--            {{ invoice.invoice_title }}-->
+<!--            </h1>-->
+<!--            <hr>-->
+<!--            <p>Number: {{ invoice.invoice_nr }}</p>-->
+<!--            <p>Customer Company name: {{ invoice.customer_company_name }}</p>-->
+<!--            <p>Customer name: {{ invoice.customer_name }}</p>-->
+<!--&lt;!&ndash;            <p>Customer email: {{ invoice.customer_email }}</p>&ndash;&gt;-->
+<!--&lt;!&ndash;            <p>Customer phone number: {{ invoice.customer_phone_number }}</p>&ndash;&gt;-->
+<!--&lt;!&ndash;            <p>Customer shipping address: {{ invoice.customer_shipping_address }}</p>&ndash;&gt;-->
+<!--&lt;!&ndash;            <p>Customer billing address: {{ invoice.customer_billing_address }}</p>&ndash;&gt;-->
+<!--&lt;!&ndash;            <p>Customer line item 1: {{ invoice.line_item_1 }}</p>&ndash;&gt;-->
+<!--            <hr class='hrItem' />-->
+<!--        </div>-->
+
+<!--          <table>-->
+<!--            <tr>-->
+<!--              <td>{{ invoice.invoice_title }}</td>-->
+<!--              <td>Number: {{ invoice.invoice_nr }}</td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--              <td>Customer name: {{ invoice.customer_name }}</td>-->
+<!--              <td>{{ invoice.customer_email }}</td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--              <td>{{ invoice.customer_phone_number }}</td>-->
+<!--              <td>Customer line item 1: {{ invoice.line_item_1 }}</td>-->
+<!--            </tr>-->
+<!--          </table>-->
+
+<!--    <hr/>-->
+
+
+    <h2>INVOICE</h2>
+    <table class="first">
+      <tr>
+        <td width="80%">BILL TO</td>
+        <td width="10%">INVOICE</td>
+        <td width="10%" class="different-font">{{ invoice.invoice_number }}</td>
+      </tr>
+      <tr>
+        <td class="different-font">Progressive Sheet Metal</td>
+        <td>DATE</td>
+        <td class="different-font">{{ invoice.created|date:'m/d/Y' }}</td>
+      </tr>
+      <tr>
+        <td class="different-font">417 S 7th St</td>
+      </tr>
+      <tr>
+        <td class="different-font">Seward, NE 68434</td>
+      </tr>
+    </table>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+
+    <table>
+    	<tr>
+    		<th class="first">SKU</th>
+    		<th class="second" width="100%">DESCRIPTION</th>
+    		<th class="third">QTY</th>
+    		<th class="forth">RATE</th>
+        <th class="fifth">AMOUNT</th>
+    	</tr>
+    	<tr>
+        {% for product in invoice.products.all %}
+    		<td class="first">{{ product.sku }}</td>
+    		<td class="second" width="100%">{{ product.verbose_name }}</td>
+    		<td class="third">1</td>
+    		<td class="forth">{{ product.suggest_retail_price }}</td>
+        <td class="fifth">{{ product.total_due }}</td>
+        {% endfor %}
+    	</tr>
+    	<tr>
+    		<td class="first">consultation </td>
+    		<td class="second">$225</td>
+    		<td class="third">1</td>
+        <td class="forth">45.7</td>
+    		<td class="fifth">$225</td>
+    	</tr>
+    	<tr>
+    		<td class="first">Service Hours</td>
+    		<td class="second">$189</td>
+    		<td class="third">45.7</td>
+        <td class="forth">45.7</td>
+    		<td class="fifth">$8637.30</td>
+    	</tr>
+    </table>
+
+    <hr>
+    <table>
+      <tr>
+        <td class="third">PAYMENT</td>
+        <td class="third">545.00</td>
+      </tr>
+      <tr>
+        <td class="third">BALANCE DUE</td>
+        <td class="third"><strong>$0.00</strong></td>
+      </tr>
+    </table>
+
+    </body>
+</html>

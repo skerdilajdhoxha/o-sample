@@ -1,0 +1,34 @@
+{% load static %}
+
+
+{% if user.user_type == 'super_user' or user.user_type == 'blu_admin' or user.user_type == 'ohi_admin' or user.user_type == 'general_user' %}
+<div class="div-block-22">
+  <div class="main_app_logo">
+    <a href="{% url 'albums:list' %}" class="w-inline-block">
+      <img src="{% static 'ohi-shop/images/256by256.png' %}" alt="" class="image-5">
+    </a>
+  </div>
+  <div class="main_app_logo blu">
+    <a href="{% url 'products:category_list' %}" class="w-inline-block">
+      <img src="{% static 'ohi-shop/images/BLU_LOGO_Cropped.jpg' %}" srcset="{% static 'ohi-shop/images/BLU_LOGO_Cropped-p-500.jpeg' %} 500w, {% static 'ohi-shop/images/BLU_LOGO_Cropped.jpg' %} 615w" sizes="(max-width: 991px) 200px, 300px" alt="" class="image-4">
+    </a>
+  </div>
+</div>
+<div class="div-block-28"></div>
+{% elif user.user_type == 'ohi_user' %}
+<div class="div-block-22">
+  <div class="main_app_logo">
+    <a href="{% url 'albums:list' %}" class="w-inline-block">
+      <img src="{% static 'ohi-shop/images/256by256.png' %}" alt="" class="image-5">
+    </a>
+  </div>
+</div>
+{% else %}
+<div class="div-block-22">
+  <div class="main_app_logo blu">
+    <a href="{% url 'products:category_list' %}" class="w-inline-block">
+      <img src="{% static 'ohi-shop/images/BLU_LOGO_Cropped.jpg' %}" srcset="{% static 'ohi-shop/images/BLU_LOGO_Cropped-p-500.jpeg' %} 500w, {% static 'ohi-shop/images/BLU_LOGO_Cropped.jpg' %} 615w" sizes="(max-width: 991px) 200px, 300px" alt="" class="image-4">
+    </a>
+  </div>
+</div>
+{% endif %}

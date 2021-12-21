@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load static  %}
+
+
+{% block content %}
+
+<div class="blu_top_nav">
+  <div data-collapse="medium" data-animation="default" data-duration="400" class="navbar-4 w-nav">
+    <div class="container-4 w-container"><a href="{% url 'products:category_list' %}" class="brand-4 w-nav-brand"></a>
+      <div style="width: 180px; height: 15px; padding-top: 0px;">
+        <a style="text-decoration: none;" href="{% static 'ohi-shop/doc/BLUToolsMasterList_V_03_14.xlsx' %}" download class="w-inline-block">
+          <h4 style="margin-top: 5px;" class="heading-12">Download Inventory</h4>
+        </a>
+      </div>
+      <nav role="navigation" class="nav-menu-4 w-nav-menu">
+        <a href="{% url 'products:category_list' %}" class="nav-link-11 w-nav-link">Product Categories</a>
+        <a href="{{ instance.get_absolute_url }}" class="nav-link-10 w-nav-link">{{ instance }}</a>
+      </nav>
+      <div class="menu-button-2 w-nav-button">
+        <div class="icon-5 w-icon-nav-menu"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="blu_silo">
+
+  {% if object_list %}
+
+<!--  <h4 class="invoice_details_header">Category's Products</h4>-->
+  {% for object in object_list %}
+  <div class="blu_catigory product_list category_list">
+    <div class="blu_catigory_cover_photo product_list">
+      <a href="{{ object.get_absolute_url }}" class="link-block product_list w-inline-block">
+        <img class="responsive" src="{{ object.get_first_photo }}" alt="{{ object.verbose_name }}">
+      </a>
+    </div>
+    <div class="blu_catigory_name_txt">{{ object.verbose_name }}‍</div>
+      <a href="{% url 'products:product_left' cat_slug=instance.slug slug=object.slug  %}" class="turn_left_button w-button">&lt;</a>
+      <a href="{% url 'products:product_right' cat_slug=instance.slug slug=object.slug  %}" class="turn_right_button w-button">&gt;</a>
+      <a href="{% url 'products:product_edit' slug=object.slug %}" class="blu_invoice_catigory_edit_button category w-button">Edit</a>
+      <a href="{% url 'products:product_delete' slug=object.slug slug2=instance.slug %}" class="blu_invoice_catigory_edit_button delete w-button">🗑</a>
+  </div>
+  {% endfor %}
+
+  <div class="blu_add_category">
+    <a href="{% url 'products:product_create' slug=instance.slug %}" class="blu_category_add_button w-button">Add Product</a>
+  </div>
+
+  {% else %}
+  <h4 class="invoice_details_header">There are no products in this category</h4>
+  <div class="blu_add_category">
+    <a href="{% url 'products:product_create' slug=instance.slug %}" class="blu_category_add_button w-button">Add Product</a>
+  </div>
+  {% endif %}
+
+  <!-- Pagination -->
+  {% include 'core/pagination.html' with object_list=object_list page_range=page_range %}
+</div>
+
+{% include 'core/blu/blu_bottom_nav.html' %}
+
+{% endblock %}

@@ -1,0 +1,266 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+
+<div class="blu_top_nav">
+  <div data-collapse="medium" data-animation="default" data-duration="400" class="navbar-4 w-nav">
+    <div class="container-4 w-container"><a href="{% url 'products:category_list' %}" class="brand-4 w-nav-brand"></a>
+      <div style="width: 180px; height: 15px; padding-top: 0px;">
+        <a style="text-decoration: none;" href="{% static 'ohi-shop/doc/BLUToolsMasterList_V_03_14.xlsx' %}" download class="w-inline-block">
+          <h4 style="margin-top: 5px;" class="heading-12">Download Inventory</h4>
+        </a>
+      </div>
+      <nav role="navigation" class="nav-menu-4 w-nav-menu">
+        <a href="{% url 'products:category_list' %}" class="nav-link-11 w-nav-link">Product Categories</a>
+        <a href="{{ product.categories.get_absolute_url }}" class="nav-link-10 w-nav-link">{{ product.categories }}</a>
+        <a href="{{ product.get_absolute_url }}" class="nav-link-10 w-nav-link">{{ product|truncatechars:30 }}</a>
+      </nav>
+      <div class="menu-button-2 w-nav-button">
+        <div class="icon-5 w-icon-nav-menu"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="blu_silo product_detail">
+  <div class="w-layout-grid grid-3">
+    <div class="blu_catigory">
+      <div class="blu_catigory_cover_photo">
+        <a href="#" class="link-block w-inline-block">
+          <div data-animation="slide" data-duration="500" data-infinite="1" class="slider w-slider">
+            <div class="mask w-slider-mask">
+              {% for obj in product.all_photos %}
+                <div class="slide w-slide"><img src="{{ obj.photo.url }}"/></div>
+                {% endfor %}
+            </div>
+            <div class="left-arrow w-slider-arrow-left">
+              <div class="w-icon-slider-left"></div>
+            </div>
+            <div class="right-arrow w-slider-arrow-right">
+              <div class="w-icon-slider-right"></div>
+            </div>
+            <div class="w-slider-nav w-round"></div>
+          </div>
+        </a>
+      </div>
+      <div class="blu_catigory_name_txt">{{ product.categories }}</div>
+      <a href="{% url 'products:product_edit' slug=product.slug  %}#photos" class="blu_invoice_catigory_edit_button w-button">Edit Photo</a>
+    </div>
+    </div>
+    <div class="div-block-31">
+      <div class="div-block-30">
+        <h1 class="heading-25">VERBOSE NAME</h1>
+        <h1 class="heading-26">{{ product.verbose_name }}</h1>
+        <a href="#" id="verbose_name_edit_button" class="button-13 w-button">Edit</a><br/>
+        <form class="photo-form" method="post" enctype="multipart/form-data">{% csrf_token %}
+          {{ form.verbose_name.non_field_errors }}
+          {{ form.verbose_name.errors }}
+          {{ form.verbose_name }}
+          <p><input id="verbose_name_save_button" class="button-13 w-button" type="submit" value="Save changes"></p>
+      </div>
+      <div class="div-block-30">
+        <h1 class="heading-25">SKU</h1>
+        <h1 class="heading-26">{{ product.sku }}</h1>
+        <a href="#" id="sku_edit_button" class="button-13 w-button">Edit</a><br/>
+          {{ form.sku.non_field_errors }}
+          {{ form.sku.errors }}
+          {{ form.sku }}
+        <p><input id="sku_save_button" class="button-13 w-button" type="submit" value="Save changes"></p>
+      </div>
+      <div class="div-block-30">
+        <h1 class="heading-25">VENDOR PRICE</h1>
+        <h1 class="heading-26">Tier 1: {{ product.tier_1_vendor_price }} Tier 2: {{ product.tier_2_vendor_price }} Tier 3: {{ product.tier_3_vendor_price }}</h1>
+        <a href="#" id="tier_1_vendor_price_edit_button" class="button-13 w-button">Edit</a><br/>
+        {{ form.tier_1_vendor_price.non_field_errors }}
+        {{ form.tier_1_vendor_price.errors }}
+        {{ form.tier_1_vendor_price }}
+        <p><input id="tier_1_vendor_price_save_button" class="button-13 w-button" type="submit" value="Save changes"></p>
+        {{ form.tier_2_vendor_price.non_field_errors }}
+        {{ form.tier_2_vendor_price.errors }}
+        {{ form.tier_2_vendor_price }}
+        <p><input id="tier_2_vendor_price_save_button" class="button-13 w-button" type="submit" value="Save changes"></p>
+        {{ form.tier_3_vendor_price.non_field_errors }}
+        {{ form.tier_3_vendor_price.errors }}
+        {{ form.tier_3_vendor_price }}
+        <p><input id="tier_3_vendor_price_save_button" class="button-13 w-button" type="submit" value="Save changes"></p>
+      </div>
+      <div class="div-block-30">
+        <h1 class="heading-25">SUGGEST RETAIL PRICE</h1>
+        <h1 class="heading-26">{{ product.suggest_retail_price }}</h1>
+        <a href="#" id="suggest_retail_price_edit_button" class="button-13 w-button">Edit</a><br/>
+          {{ form.suggest_retail_price.non_field_errors }}
+          {{ form.suggest_retail_price.errors }}
+          {{ form.suggest_retail_price }}
+        <p><input id="suggest_retail_price_save_button" class="button-13 w-button" type="submit" value="Save changes"></p>
+      </div>
+    </div>
+    <div id="w-node-56774bf834db-526200e4" class="div-block-30 left">
+      <h1 class="heading-25">SHIPPING WEIGHT (lb)</h1>
+      <h1 class="heading-26">{{ product.shipping_weight }}</h1>
+      <a href="#" id="shipping_weight_edit_button" class="button-13 w-button">Edit</a><br/>
+        {{ form.shipping_weight.non_field_errors }}
+        {{ form.shipping_weight.errors }}
+        {{ form.shipping_weight }}
+      <p><input id="shipping_weight_save_button" class="button-13 w-button" type="submit" value="Save changes"></p>
+    </div>
+    <div id="w-node-394d554442c6-526200e4" class="div-block-30">
+      <h1 class="heading-25">SHIPPING BOX MEASUREMENTS</h1>
+      <h1 class="heading-26">Shipping box length (inch): {{ product.shipping_box_length }}</h1>
+      <h1 class="heading-26">Shipping box depth (inch): {{ product.shipping_box_depth }}</h1>
+      <h1 class="heading-26">Shipping box height (inch): {{ product.shipping_box_height }}</h1>
+      <a href="#" id="shipping_box_length_edit_button" class="button-13 w-button">Edit</a><br/>
+      {{ form.shipping_box_length.non_field_errors }}
+      {{ form.shipping_box_length.errors }}
+      {{ form.shipping_box_length }}
+      <p><input id="shipping_box_length_save_button" class="button-13 w-button" type="submit" value="Save changes"></p>
+      {{ form.shipping_box_depth.non_field_errors }}
+      {{ form.shipping_box_depth.errors }}
+      {{ form.shipping_box_depth }}
+      <p><input id="shipping_box_depth_save_button" class="button-13 w-button" type="submit" value="Save changes"></p>
+      {{ form.shipping_box_height.non_field_errors }}
+      {{ form.shipping_box_height.errors }}
+      {{ form.shipping_box_height }}
+      <p><input id="shipping_box_height_save_button" class="button-13 w-button" type="submit" value="Save changes"></p>
+    </div>
+
+  <div class="div-block-30 left">
+    <h1 class="heading-25">PRODUCT PRODUCTION COST</h1>
+    <h1 class="heading-26">{{ product.production_cost }}</h1>
+    <a href="#" id="production_cost_edit_button" class="button-13 w-button">Edit</a><br/>
+    {{ form.production_cost.non_field_errors }}
+    {{ form.production_cost.errors }}
+    {{ form.production_cost }}
+    <p><input id="production_cost_save_button" class="button-13 w-button" type="submit" value="Save changes"></p>
+  </div>
+  <div class="div-block-30">
+    <h1 class="heading-25">PRODUCT MEASUREMENTS</h1>
+    <h1 class="heading-26">Product weight (lb): {{ product.product_weight }}</h1>
+    <h1 class="heading-26">Product length (inch): {{ product.product_length }}</h1>
+    <h1 class="heading-26">Product depth (inch): {{ product.product_depth }}</h1>
+    <h1 class="heading-26">Product height (inch): {{ product.product_height }}</h1>
+    <a href="#" id="product_weight_edit_button" class="button-13 w-button">Edit</a><br/>
+    {{ form.product_weight.non_field_errors }}
+    {{ form.product_weight.errors }}
+    {{ form.product_weight }}
+    <p><input id="product_weight_save_button" class="button-13 w-button" type="submit" value="Save changes"></p>
+    {{ form.product_length.non_field_errors }}
+    {{ form.product_length.errors }}
+    {{ form.product_length }}
+    <p><input id="product_length_save_button" class="button-13 w-button" type="submit" value="Save changes"></p>
+    {{ form.product_depth.non_field_errors }}
+    {{ form.product_depth.errors }}
+    {{ form.product_depth }}
+    <p><input id="product_depth_save_button" class="button-13 w-button" type="submit" value="Save changes"></p>
+    {{ form.product_height.non_field_errors }}
+    {{ form.product_height.errors }}
+    {{ form.product_height }}
+    <p><input id="product_height_save_button" class="button-13 w-button" type="submit" value="Save changes"></p>
+  </div>
+
+  </form>
+</div>
+
+{% include 'core/blu/blu_bottom_nav.html' %}
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" type="text/javascript" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script type='text/javascript'>
+    $(document).ready(function(){
+        $('#id_verbose_name').hide();
+        $('#verbose_name_save_button').hide();
+        $('#verbose_name_edit_button').on('click', function(){
+          $('#id_verbose_name').fadeToggle();
+          $('#verbose_name_save_button').fadeToggle();
+            });
+
+        $('#id_sku').hide();
+        $('#sku_save_button').hide();
+        $('#sku_edit_button').on('click', function(){
+          $('#id_sku').fadeToggle();
+          $('#sku_save_button').fadeToggle();
+            });
+
+        $('#id_tier_1_vendor_price').hide();
+        $('#id_tier_2_vendor_price').hide();
+        $('#id_tier_3_vendor_price').hide();
+        $('#tier_1_vendor_price_save_button').hide();
+        $('#tier_2_vendor_price_save_button').hide();
+        $('#tier_3_vendor_price_save_button').hide();
+        $('#tier_1_vendor_price_edit_button').on('click', function(){
+          $('#id_tier_1_vendor_price').fadeToggle();
+          $('#id_tier_2_vendor_price').fadeToggle();
+          $('#id_tier_3_vendor_price').fadeToggle();
+          $('#tier_1_vendor_price_save_button').fadeToggle();
+          $('#tier_2_vendor_price_save_button').fadeToggle();
+          $('#tier_3_vendor_price_save_button').fadeToggle();
+            });
+
+        $('#id_suggest_retail_price').hide();
+        $('#suggest_retail_price_save_button').hide();
+        $('#suggest_retail_price_edit_button').on('click', function(){
+          $('#id_suggest_retail_price').fadeToggle();
+          $('#suggest_retail_price_save_button').fadeToggle();
+            });
+
+        $('#id_shipping_weight').hide();
+        $('#shipping_weight_save_button').hide();
+        $('#shipping_weight_edit_button').on('click', function(){
+          $('#id_shipping_weight').fadeToggle();
+          $('#shipping_weight_save_button').fadeToggle();
+            });
+
+        $('#id_shipping_box_length').hide();
+        $('#id_shipping_box_depth').hide();
+        $('#id_shipping_box_height').hide();
+        $('#shipping_box_length_save_button').hide();
+        $('#shipping_box_depth_save_button').hide();
+        $('#shipping_box_height_save_button').hide();
+        $('#shipping_box_length_edit_button').on('click', function(){
+          $('#id_shipping_box_length').fadeToggle();
+          $('#id_shipping_box_depth').fadeToggle();
+          $('#id_shipping_box_height').fadeToggle();
+          $('#shipping_box_length_save_button').fadeToggle();
+          $('#shipping_box_depth_save_button').fadeToggle();
+          $('#shipping_box_height_save_button').fadeToggle();
+            });
+
+        $('#id_product_weight').hide();
+        $('#product_weight2_save_button').hide();
+        $('#product_weight2_edit_button').on('click', function(){
+          $('#id_product_weight').fadeToggle();
+          $('#product_weight2_save_button').fadeToggle();
+            });
+
+        $('#id_product_weight').hide();
+        $('#id_product_length').hide();
+        $('#id_product_depth').hide();
+        $('#id_product_height').hide();
+        $('#product_weight_save_button').hide();
+        $('#product_length_save_button').hide();
+        $('#product_depth_save_button').hide();
+        $('#product_height_save_button').hide();
+        $('#product_weight_edit_button').on('click', function(){
+          $('#id_product_weight').fadeToggle();
+          $('#id_product_length').fadeToggle();
+          $('#id_product_depth').fadeToggle();
+          $('#id_product_height').fadeToggle();
+          $('#product_weight_save_button').fadeToggle();
+          $('#product_length_save_button').fadeToggle();
+          $('#product_depth_save_button').fadeToggle();
+          $('#product_height_save_button').fadeToggle();
+            });
+
+        $('#id_production_cost').hide();
+        $('#production_cost_save_button').hide();
+        $('#production_cost_edit_button').on('click', function(){
+          $('#id_production_cost').fadeToggle();
+          $('#production_cost_save_button').fadeToggle();
+            });
+
+    });
+</script>
+
+
+{% endblock %}

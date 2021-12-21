@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+
+{% include 'core/blu/blu_top_nav.html' %}
+
+<!--<div class="blu_silo">-->
+<!--{% for object in categories %}-->
+<!--<div class="blu_invoice_catigory">-->
+
+<!--    {% if object.photo %}-->
+<!--    <div class="blu_invoice_catigory_cover_photo">-->
+<!--        <a href="{{ object.get_absolute_url }}" class="link-block w-inline-block">-->
+<!--            <img src="{{ object.photo.url }}" alt="{{ object.title }}">-->
+<!--        </a>-->
+<!--    </div>-->
+<!--    {% endif %}-->
+<!--    <div class="blu_invoice_catigory_name_txt-copy">-->
+<!--        <h4 class="blu_invoice_category_number">Category: {{ object.name }}</h4>-->
+<!--        <h5 class="blu_invoice_category_title">{{ object.title|truncatechars:40 }}</h5>-->
+<!--    </div>-->
+<!--    <div class="blu_list_category_buttons_div">-->
+<!--        <a href="{% url 'products:category_edit' slug=object.slug %}" class="blu_list_product_edit_button w-button">Edit</a>-->
+<!--        <a href="{% url 'products:category_delete' slug=object.slug %}" class="blu_list_product_delete_button w-button">Delete</a>-->
+<!--    </div>-->
+<!--</div>-->
+<!--{% endfor %}-->
+<!--<div class="blu_invoice_add_category"><a href="{% url 'products:category_create' %}" class="blu_invoice_category_add_button w-button">Add Category</a></div>-->
+<!--<div class="blu_invoice_sategory_spacer"></div>-->
+
+<!--&lt;!&ndash; Pagination &ndash;&gt;-->
+<!--{% include 'core/pagination.html' with categories=object_list page_range=page_range %}-->
+<!--</div>-->
+
+
+<div class="blu_silo">
+  {% for object in categories %}
+  <div class="blu_catigory product_list category_list">
+    <div class="blu_catigory_cover_photo product_list">
+      <a href="{{ object.get_absolute_url }}" class="link-block product_list w-inline-block">
+        <img src="{{ object.photo.url }}" alt="{{ object.title }}">
+      </a>
+    </div>
+    <div class="blu_catigory_name_txt">{{ object.name }}</div>
+    <a href="{% url 'products:category_left' slug=object.slug %}" class="turn_left_button w-button">&lt;</a>
+    <a href="{% url 'products:category_right' slug=object.slug %}" class="turn_right_button w-button">&gt;</a>
+    <a href="{% url 'products:category_edit' slug=object.slug %}" class="blu_invoice_catigory_edit_button category w-button">Edit</a>
+    <a href="{% url 'products:category_delete' slug=object.slug %}" class="blu_invoice_catigory_edit_button delete w-button">🗑</a>
+  </div>
+  {% endfor %}
+
+  <div class="blu_add_category"><a href="{% url 'products:category_create' %}" class="blu_category_add_button w-button">Add Category</a></div>
+
+  <!-- Pagination -->
+  {% include 'core/pagination.html' with categories=object_list page_range=page_range %}
+</div>
+
+{% include 'core/blu/blu_bottom_nav.html' %}
+
+{% endblock %}

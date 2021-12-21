@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+
+{% include 'core/ohi/ohi_top_nav.html' %}
+
+<style>
+  #id_username_input-username {
+    color: #333;
+  }
+  #id_user_type_input-user_type {
+    background-color: #3898ec;
+  }
+  #id_user_type_input-expiration_date {
+    background-color: #3898ec;
+  }
+</style>
+
+<div class="main_app_silo">
+
+  {% if user.profile.username %}
+  <h1 class="heading-13">{{ user.profile.username }}'s Profile</h1>
+  {% else %}
+  <h1 class="heading-13">{{ user }} Profile</h1>
+  {% endif %}
+    <div class="div-block-25">
+      <div class="main_app_profile_picture">
+        <div class="div-block-24">
+          <img src="{{ user.profile.photo_url }}">
+        </div>
+        <button class="main_app_button w-button photo_button">Edit Picture</button>
+        <form class="photo-form" method="post" enctype="multipart/form-data">{% csrf_token %}
+          {{ profile_username_form.photo.label_tag }}
+          {{ profile_username_form.photo.non_field_errors }}
+          {{ profile_username_form.photo.errors }}
+          {{ profile_username_form.photo }}
+          <p><input id="photo_save"  class="main_app_button w-button" name="username_input" type="submit" value="Save changes"></p>
+<!--        </form>-->
+      </div>
+<!--      <div class="div-block-26">-->
+        <div class="main_app_user_info">
+          <div class="main_app_user_info">
+            <h1 class="heading-16">User name</h1>
+            <a class="main_app_button w-button username_button">Edit Name</a>
+            <br/>
+            <br/>
+<!--            <form class="username-form" method="post" enctype="multipart/form-data">{% csrf_token %}-->
+<!--              {{ profile_username_form.username.label_tag }}-->
+              {{ profile_username_form.username.non_field_errors }}
+              {{ profile_username_form.username.errors }}
+              {{ profile_username_form.username }}
+              <p><input id="username_save" class="main_app_button w-button" name="username_input" type="submit" value="Save changes"></p>
+            </form>
+          </div>
+          <div class="main_app_user_info">
+            <h1 class="heading-16">Password</h1>
+            <a href="{% url 'members:edit_member_password' pk=user.pk %}" class="main_app_button w-button">Edit Password</a>
+          </div>
+          <div class="main_app_user_info">
+            <h1 class="heading-16">Account type</h1>
+            <form class="user_type-form" method="post" enctype="multipart/form-data">{% csrf_token %}
+              {{ user_form.user_type.non_field_errors }}
+              {{ user_form.user_type.errors }}
+              {{ user_form.user_type }}
+              <br/>
+              <br/>
+              <p><input class="main_app_button w-button" name="user_type_input" type="submit" value="Save changes"></p>
+<!--            </form>-->
+<!--          </div>-->
+<!--          <div class="main_app_user_info">-->
+            <h1 class="heading-16">Account expiration date</h1>
+            {{ user_form.expiration_date.non_field_errors }}
+              {{ user_form.expiration_date.errors }}
+              {{ user_form.expiration_date }}
+              <br/>
+              <br/>
+              <p><input class="main_app_button w-button" name="user_expiration_date_input" type="submit" value="Save changes"></p>
+            </form>
+
+
+
+<!--            <div data-delay="0" class="w-dropdown">-->
+<!--              <div class="dropdown-toggle-4 w-dropdown-toggle">-->
+<!--                <div class="icon-3 w-icon-dropdown-toggle"></div>-->
+<!--                <div class="text-block-3">Dropdown</div>-->
+<!--              </div>-->
+<!--              <nav class="w-dropdown-list">-->
+<!--                <a href="#" class="w-dropdown-link">Link 1</a>-->
+<!--                <a href="#" class="w-dropdown-link">Link 2</a>-->
+<!--                <a href="#" class="w-dropdown-link">Link 3</a>-->
+<!--              </nav>-->
+<!--            </div>-->
+          </div>
+        </div>
+<!--      </div>-->
+    </div>
+</div>
+
+{% include 'core/ohi/ohi_bottom_nav.html' %}
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" type="text/javascript" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+<script type='text/javascript'>
+    $(document).ready(function(){
+        $('.photo-form').hide();
+        $('.photo_button').on('click', function(){
+            $('.photo-form').fadeToggle();
+                });
+
+        $('#id_username_input-username').hide();
+        $('#username_save').hide();
+        $('.username_button').on('click', function(){
+            $('#id_username_input-username').fadeToggle();
+            $('#username_save').fadeToggle();
+                });
+    });
+</script>
+
+
+{% endblock %}

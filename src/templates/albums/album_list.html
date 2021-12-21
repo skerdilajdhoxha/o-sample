@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+
+{% include 'core/ohi/ohi_top_nav.html' %}
+
+<div class="main_app_silo">
+{% for album in object_list %}
+<div class="ohi_category_box">
+  <div class="ohi_cateogry_photo">
+    <a href="{{ album.get_absolute_url }}" class="ohi_link_box w-inline-block">
+      <img src="{{ album.get_first_photo }}">
+    </a>
+  </div>
+  <div class="ohi_category_name">Album's name: {{ album.name|truncatechars:40 }} {{ album.album_nr }}</div>
+  <a href="{% url 'albums:album_left' pk=album.pk %}" class="turn_left_button w-button">&lt;</a>
+  <a href="{% url 'albums:album_right' pk=album.pk %}" class="turn_right_button w-button">&gt;</a>
+  <a href="{% url 'albums:update' pk=album.pk %}" class="ohi_category_button w-button">EDIT</a>
+  <a href="{% url 'albums:delete' pk=album.pk %}" class="ohi_category_button delate_button delete w-button">🗑</a>
+</div>
+{% endfor %}
+<div class="ohi_add_category">
+  <a href="{% url 'albums:create' %}" class="ohi_add_categroy w-button">ADD ALBUM</a>
+</div>
+
+
+<!-- Pagination -->
+{% include 'core/pagination.html' with object_list=object_list page_range=page_range %}
+</div>
+
+{% include 'core/ohi/ohi_bottom_nav.html' %}
+
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}Activity Log{% endblock %}
+
+
+{% block content %}
+
+{% include 'core/ohi/ohi_top_nav.html' %}
+
+<div class="main_app_silo">
+  <h1 class="heading-20">Activity Log</h1>
+  <div class="div-block-29">
+    <div>
+      <h1 class="heading-22 title">Date</h1>
+    </div>
+    <div>
+      <h1 class="heading-23 title">Author</h1>
+    </div>
+    <div>
+      <h1 class="heading-24 title">Change</h1>
+    </div>
+  </div>
+  {% for action in actions %}
+  <div class="div-block-29">
+    <div>
+      <h1 class="heading-22">{{ action.created|date:"D d M Y" }}</h1>
+    </div>
+    <div>
+      {% if action.user.profile.username %}
+      <h1 class="heading-23">{{ action.user.profile.username }}</h1>
+      {% else %}
+      <h1 class="heading-23">{{ action.user }}</h1>
+      {% endif %}
+    </div>
+    <div>
+      <h1 class="heading-24">{{ action.verb }} - {{ action.target_str }}</h1>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% include 'core/ohi/ohi_bottom_nav.html' %}
+
+{% endblock %}

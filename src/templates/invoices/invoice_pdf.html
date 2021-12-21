@@ -1,0 +1,17 @@
+<style type="text/css">
+      @page { size: 8.5in 11.0in }
+</style>
+<div>
+    <h1>
+        {{ invoice.invoice_title }}
+    </h1>
+    <hr>
+    <p>Number: {{ invoice.invoice_nr }}</p>
+    <p>Customer Company name: {{ invoice.customer_company_name }}</p>
+    <p>Customer name: {{ invoice.customer_name }}</p>
+    <p>Customer email: {{ invoice.customer_email }}</p>
+    <p>Customer phone number: {{ invoice.customer_phone_number }}</p>
+    <p>Customer shipping address: {{ invoice.customer_shipping_address }}</p>
+    <p>Customer billing address: {{ invoice.customer_billing_address }}</p>
+    <p>Customer line item 1: {{ invoice.line_item_1 }}</p>
+</div>

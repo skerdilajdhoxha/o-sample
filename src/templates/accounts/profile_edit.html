@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<div class="blu_invoice_detail_render_block_2">
+    <div class="blu_invoice_detail_render">
+        <img src="{{ profile.photo.url }}">
+    </div>
+</div>
+
+
+<form class="form" method="post" enctype="multipart/form-data">{% csrf_token %}
+    <label class="field-label">{{ user_form.first_name.label }}</label>
+    {{ user_form.first_name }}
+    <input type="submit" value="Submit" class="blu_invoice_edit_field_submit_button w-button">
+</form>
+
+<form class="form" method="post" enctype="multipart/form-data">{% csrf_token %}
+    <label class="field-label">{{ user_form.last_name.label }}</label>
+    {{ user_form.last_name }}
+    <input type="submit" value="Submit" class="blu_invoice_edit_field_submit_button w-button">
+</form>
+
+<form class="form" method="post" enctype="multipart/form-data">{% csrf_token %}
+    <label class="field-label">{{ profile_form.username.label }}</label>
+    {{ profile_form.username }}
+    <input type="submit" value="Submit" class="blu_invoice_edit_field_submit_button w-button">
+</form>
+
+<form class="form" method="post" enctype="multipart/form-data">{% csrf_token %}
+    <label class="field-label">{{ profile_form.date_of_birth.label }}</label>
+<!--    {{ profile_form.date_of_birth.help_text }}-->
+    {{ profile_form.date_of_birth }}
+    <input type="submit" value="Submit" class="blu_invoice_edit_field_submit_button w-button">
+</form>
+
+<form class="form" method="post" enctype="multipart/form-data">{% csrf_token %}
+    <label class="field-label">{{ profile_form.photo.label }}</label>
+    {{ profile_form.photo }}
+    <input type="submit" value="Submit" class="">
+</form>
+
+{% endblock %}

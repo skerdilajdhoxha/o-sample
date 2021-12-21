@@ -1,0 +1,52 @@
+# Dependencies
+If you want to install or add another third party module, add it to requirements.in/base.txt
+with it's version ex: Django==2.2.5, then pip-compile it like this:
+pip-compile --output-file=requirements/dev.txt requirements.in/dev.txt or
+pip-compile --output-file=requirements/prod.txt requirements.in/prod.txt
+and then install it: pip install -r requirements/dev.txt
+This is done so we don't mess with dependencies versions.
+
+# Code formatting
+In project directory run: isort src
+In project directory run: black src
+
+# Authentication of users and database
+root:     --------
+django:   --------
+skerdi:   --------
+
+# Django PostgreSQL database
+Database: ohi_shop_database
+User:     ------
+Pass:     ---------------------------
+
+# Gmail server
+EMAIL_HOST = '----------------'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = '--------------------------------'
+EMAIL_HOST_PASSWORD = '-----------'
+SERVER_EMAIL = '-----------------------------'
+
+# Python Virtualenv
+source virtualenv_file_name/bin/activate
+deactivate
+
+
+# Gunicorn
+restart:           sudo systemctl restart gunicorn
+logs:              sudo journalctl -u gunicorn, journalctl --unit=gunicorn | tail -n 200
+check status:      sudo systemctl status gunicorn
+reload the daemon: sudo systemctl daemon-reload
+
+# Nginx
+restart: sudo systemctl restart nginx
+check:   sudo nginx -t
+logs:    sudo tail -F /var/log/nginx/error.log
+# reload
+sudo systemctl restart gunicorn && sudo systemctl restart nginx
+
+# Steps to take if this server is cloned
+sh /home/django/utils/bin/rename_django_project
+Change domain and subdomains in nginx
+Get SSL certificate: sudo certbot --nginx -d example.com -d www.example.com

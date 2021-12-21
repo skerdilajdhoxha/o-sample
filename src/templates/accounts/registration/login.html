@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+
+{% block content %}
+
+<div class="main_app_silo">
+  <div class="div-block-16">
+    <h1 class="heading-6">Login</h1>
+    <div class="main_app_login">
+      <form id="wf-form-Email-Form2" name="wf-form-Email-Form" data-name="Email Form" class="form-2" method="post">
+        {% csrf_token %}
+
+        {{ form.non_field_errors }}
+
+        {{ form.username.errors }}
+        <label class="field-label-2">{{ form.username.label }}</label>
+        {{ form.username|add_class:"w-input" }}
+        {{ form.password.errors }}
+        <label class="field-label-3">{{ form.password.label }}</label>
+        {{ form.password|add_class:"w-input" }}
+        <input type="submit" value="Login" class="w-button">
+      </form>
+    </div>
+
+      <br>
+    <a href="{% url 'password_reset' %}" class="main_app_button w-button">Forgot your password?</a>
+  </div>
+</div>
+
+{% endblock %}

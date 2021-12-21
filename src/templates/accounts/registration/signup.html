@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+
+{% block content %}
+
+<!--<div class="main_app_silo">-->
+<!--<h2>Sign up</h2>-->
+<!--<form method="post">-->
+<!--    {% csrf_token %}-->
+<!--    {{ form.as_p }}-->
+<!--    <button type="submit">Sign up</button>-->
+<!--</form>-->
+<!--</div>-->
+
+
+<div class="main_app_silo">
+  <div class="div-block-16">
+    <h1 class="heading-6">Sign Up</h1>
+      <form id="wf-form-Email-Form2" name="wf-form-Email-Form" data-name="Email Form" class="form-2" method="post">
+        {% csrf_token %}
+
+        {{ form.non_field_errors }}
+
+        {{ form.email.errors }}
+        <label class="field-label-2">{{ form.email.label }}</label>
+        {{ form.email|add_class:"w-input" }}
+        {{ form.password1.errors }}
+        <label class="field-label-3">{{ form.password1.label }}</label>
+        {{ form.password1|add_class:"w-input" }}
+        {{ form.password2.errors }}
+        <label class="field-label-3">{{ form.password2.label }}</label>
+        {{ form.password2|add_class:"w-input" }}
+
+        {{ form.user_type.errors }}
+        <label class="field-label-3">{{ form.user_type.label }}</label>
+        {{ form.user_type|add_class:"main_app_button w-button" }}<p></p>
+
+        <input type="submit" value="Submit" class="w-button">
+      </form>
+
+      <br>
+<!--    <a href="{% url 'password_reset' %}" class="main_app_button w-button">Forgot your password?</a>-->
+  </div>
+</div>
+
+
+{% endblock %}

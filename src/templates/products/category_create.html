@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+
+{% block content %}
+
+{% include 'core/blu/blu_top_nav.html' %}
+
+<!--<div class="blu_silo">-->
+<!--  <form class="form-centered" method="post" enctype="multipart/form-data">{% csrf_token %}-->
+<!--    {{ form.as_p }}-->
+<!--    <p><input class="create-object-submit-button" type="submit" value="Submit"></p>-->
+<!--  </form>-->
+<!--</div>-->
+
+
+<div class="blu_silo">
+  <h3 class="blulinkheader">Create new Product Category</h3>
+    <p class="blulinkheader">Please note!!! If you want to fill more than one field you have to press the last big "Submit All" button</p>
+  <hr/>
+  <div class="form-block-3 w-clearfix">
+    <form id="email-form-2" name="email-form-2" data-name="Email Form 2" class="form-4" method="post" enctype="multipart/form-data">{% csrf_token %}
+      {% for field in form %}
+      <div class="div-block-33">
+        <label class="field-label-5">{{ field.label }}</label>
+        {{ field|add_class:"text-field-2 w-input" }}
+        {{ field.help_text }}
+        <input type="submit" value="Submit only" class="button-14 w-button">
+      </div>
+      {% endfor %}
+      <input style="padding: 17px 44px; font-size: 25px;" type="submit" value="Submit All" class=" w-button">
+    </form>
+  </div>
+</div>
+
+{% include 'core/blu/blu_bottom_nav.html' %}
+
+{% endblock %}

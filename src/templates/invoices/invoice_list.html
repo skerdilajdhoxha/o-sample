@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+
+{% include 'core/blu/blu_top_nav.html' %}
+
+<div class="blu_silo">
+  {% if object_list %}
+  {% for invoice in object_list %}
+  <div class="blu_invoice_catigory">
+    <div class="blu_invoice_catigory_cover_photo">
+      <a href="{{ invoice.get_pdf_url }}" class="link-block w-inline-block">
+        <img src="{{ invoice.image.url }}">
+      </a>
+    </div>
+    <div class="blu_invoice_catigory_name_txt-copy">
+      <h4 class="blu_invoice_category_number">*Invoice# {{ invoice.invoice_nr }}</h4>
+      <h5 class="blu_invoice_category_title">*Title of the Invoice<br>{{ invoice.invoice_title|truncatechars:40 }}</h5>
+    </div>
+    <a href="{% url 'invoices:left' pk=invoice.pk %}" class="turn_left_button w-button">&lt;</a>
+    <a href="{% url 'invoices:right' pk=invoice.pk %}" class="turn_right_button w-button">&gt;</a>
+    <a href="{% url 'invoices:pdf_download' pk=invoice.pk %}" class="blu_invoice_catigory_edit_button invoice w-button">PDF</a>
+    <a href="{% url 'invoices:invoice_update' slug=invoice.slug %}" class="blu_invoice_catigory_edit_button invoice w-button">Edit</a>
+    <a href="{% url 'invoices:invoice_delete' slug=invoice.slug %}" class="blu_invoice_catigory_delete_button blu_invoice_catigory_edit_button invoice w-button">🗑</a>
+  </div>
+  {% endfor %}
+  {% endif %}
+
+  <div class="blu_invoice_add_category">
+    <a href="{% url 'invoices:invoice_create' %}" class="blu_invoice_category_add_button w-button">Add Invoice</a>
+  </div>
+<!--  <div class="pagination">-->
+<!--    <a href="#" class="button-4 w-button"></a>-->
+<!--    <a href="#" class="button-3 w-button"></a>-->
+<!--    <a href="#" class="w-button">1</a>-->
+<!--    <a href="#" class="w-button">2</a>-->
+<!--    <a href="#" class="button-5 w-button"></a>-->
+<!--    <a href="#" class="button-6 w-button"></a>-->
+<!--  </div>-->
+<!--  <div class="blu_invoice_sategory_spacer"></div>-->
+</div>
+
+
+<!-- Pagination -->
+{% include 'core/pagination.html' with object_list=object_list page_range=page_range %}
+
+{% include 'core/blu/blu_bottom_nav.html' %}
+
+{% endblock %}

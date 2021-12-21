@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static  %}
+
+
+{% block content %}
+
+{% include 'core/ohi/ohi_top_nav.html' %}
+
+<div class="main_app_silo">
+  <div class="ohi_category_box">
+    <div class="ohi_cateogry_photo">
+        <img src="{{ instance.photo.url }}" alt="{{ instance.title }}">
+    </div>
+    <div class="ohi_category_name">Category: {{ instance.name }}</div>
+    <a href="#" class="turn_left_button w-button">&lt;</a>
+    <a href="#" class="turn_right_button w-button">&gt;</a>
+    <a href="{% url 'albums:category_edit' slug=instance.slug %}" class="ohi_category_button w-button">EDIT</a>
+    <a href="{% url 'albums:category_delete' slug=instance.slug %}" class="ohi_category_button delete w-button">🗑</a>
+  </div>
+
+  <hr/>
+  {% if object_list %}
+  <h4 class="invoice_details_header">Category's Albums</h4>
+
+  {% for object in object_list %}
+  <div class="ohi_category_box">
+    <div class="ohi_cateogry_photo">
+      <a href="{{ object.get_absolute_url }}" class="ohi_link_box w-inline-block">
+        <img src="{{ object.get_first_photo }}" alt="{{ object.title }}">
+      </a>
+    </div>
+    <div class="ohi_category_name">Album's name: {{ object.name }}</div>
+    <a href="#" class="turn_left_button w-button">&lt;</a>
+    <a href="#" class="turn_right_button w-button">&gt;</a>
+    <a href="{% url 'albums:update' pk=object.pk %}" class="ohi_category_button w-button">EDIT</a>
+    <a href="{% url 'albums:delete' pk=object.pk %}" class="ohi_category_button delete w-button">🗑</a>
+  </div>
+  {% endfor %}
+
+  {% else %}
+  <h4 class="invoice_details_header">There are no albums in this category</h4>
+  {% endif %}
+</div>
+{% include 'core/ohi/ohi_bottom_nav.html' %}
+
+{% endblock %}

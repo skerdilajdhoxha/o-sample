@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+
+{% include 'core/ohi/ohi_top_nav.html' %}
+
+<div class="main_app_silo">
+  <h2 class="blulinkheader">Update {{ category }}</h2>
+  <div class="ohi_category_box_2">
+    <div class="ohi_cateogry_photo">
+      <img src="{{ category.photo.url }}">
+    </div>
+  </div>
+   <form class="form" method="post" enctype="multipart/form-data">{% csrf_token %}
+      {% for field in form %}
+      <label class="field-label-4">{{ field.label }}</label>
+
+      {{ field }}
+      {{ field.help_text }}
+      <input type="submit" value="Submit" class="submit-button w-button">
+      {% endfor %}
+    </form>
+    </div>
+  <div>
+<!--    <div class="w-form">-->
+<!--      <form id="email-form" name="email-form" data-name="Email Form" class="form-3 w-clearfix">-->
+<!--        <label for="name" class="field-label-4">Name</label>-->
+<!--        <input type="text" class="text-field w-input" maxlength="256" name="name" data-name="Name" id="name">-->
+<!--        <input type="submit" value="Submit" data-wait="Please wait..." class="submit-button w-button">-->
+<!--      </form>-->
+
+
+<!--  </div>-->
+
+
+</div>
+{% include 'core/ohi/ohi_bottom_nav.html' %}
+
+{% endblock %}

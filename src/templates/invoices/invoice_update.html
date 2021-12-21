@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+
+{% block content %}
+
+{% include 'core/blu/blu_top_nav.html' %}
+
+<!--<form class="form" method="post" enctype="multipart/form-data">{% csrf_token %}-->
+<!--  {% for field in form %}-->
+
+<!--  <label class="field-label">{{ field.label }}</label>-->
+<!--  {{ field }}-->
+<!--  {{ field.help_text }}-->
+<!--  <input type="submit" value="Submit" class="blu_invoice_edit_field_submit_button w-button">-->
+<!--  {% endfor %}-->
+<!--</form>-->
+
+<div class="blu_silo">
+  <div class="blu_invoice_detail_render_block">
+    <div class="blu_invoice_detail_render">
+      <img src="{{ invoice.image.url }}">
+    </div>
+    <a href="#" class="blu_invoice_details_save_button w-button">Save And Render</a>
+    <a href="{% url 'invoices:pdf_download' pk=invoice.pk %}" class="blu_invoice_details_download_button w-button">Download Render</a>
+  </div>
+  <div class="form-block-3 w-clearfix">
+    <form id="email-form-2" name="email-form-2" data-name="Email Form 2" class="form-4" method="post" enctype="multipart/form-data">{% csrf_token %}
+      {% for field in form %}
+      <div class="div-block-33">
+        <label class="field-label-5">{{ field.label }}</label>
+        {{ field|add_class:"text-field-2 w-input" }}
+        {{ field.help_text }}
+        <input type="submit" value="Submit" class="button-14 w-button">
+      </div>
+      {% endfor %}
+    </form>
+  </div>
+</div>
+
+
+
+
+
+
+{% include 'core/blu/blu_bottom_nav.html' %}
+
+{% endblock %}

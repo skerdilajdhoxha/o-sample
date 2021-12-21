@@ -1,0 +1,26 @@
+
+
+{% if object_list.has_next or object_list.has_previous %}
+<div class="pagination">
+    {% if object_list.has_previous %}
+    <a class="button-4 w-button" href="?page=1"></a>
+    <a class="button-3 w-button" href="?page={{object_list.previous_page_number}}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}"></a>
+    {% endif %}
+
+    {% for pg in page_range %}
+    {% if people.number == pg %}
+    <a class="w-button active" href="?page={{pg}}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{{pg}}</a>
+    {% else %}
+
+    <a class="w-button" href="?page={{pg}}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{{pg}}</a>
+
+    {% endif %}
+    {% endfor %}
+    {% if object_list.has_next %}
+    <a class="button-5 w-button" href="?page={{object_list.next_page_number}}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}"></a>
+    <a class="button-6 w-button" href="?page={{ object_list.paginator.num_pages }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}"></a>
+    {% endif %}
+</div>
+{% endif %}
+<br>
+<br>

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}Member's List{% endblock %}
+
+
+{% block content %}
+
+{% include 'core/ohi/ohi_top_nav.html' %}
+
+<div class="main_app_silo">
+  <h1 class="heading-17">User management list </h1>
+  {% for user in object_list %}
+  <div class="main_app_user_list">
+    <h1 class="heading-19">User Name: {% if user.profile.username %}{{ user.profile.username }}{% else %}{{ user }}{% endif %}<br>User expiration date: {{ user.expiration_date }}</h1>
+    <a href="{% url 'members:member_profile' pk=user.pk %}" class="main_app_button w-button">Edit User</a>
+  </div>
+  {% endfor %}
+</div>
+
+{% include 'core/ohi/ohi_bottom_nav.html' %}
+
+{% endblock %}
